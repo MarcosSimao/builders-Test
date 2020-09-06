@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.builders.builder.Repository.ClienteReposity;
 import com.builders.builder.domain.Cliente;
+import com.builders.builder.dto.ClienteDto;
 import com.builders.builder.service.exception.ObjectNotFoundException;
 
 import com.sun.jdi.ObjectCollectedException;
@@ -22,6 +23,10 @@ public class ClienteService {
 		return repo.findAll();
 		}
 	
+	public Cliente findById(String id) {
+		Optional<Cliente> cliente = repo.findById(id);
+		return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+	}
 	public Cliente findByCpf(String cpf) {
 		
 		Optional<Cliente> cliente = repo.findByCpf(cpf);
@@ -30,9 +35,37 @@ public class ClienteService {
 	}
 	
 public Cliente findByNome(String nome) {
+
 		
 		Optional<Cliente> cliente = repo.findByNome(nome);
 		
 		return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
+
+public Cliente insert(Cliente cliente) {
+	return repo.insert(cliente);
+	
+}
+public void delete(String id) {
+	findById(id);
+	repo.deleteById(id);
+	
+}
+public Cliente update(Cliente cliente) {
+	Cliente newClie = findById(cliente.getId());
+	
+	updateNew(newClie,cliente);
+	return repo.save(newClie);
+	
+	
+}
+public void updateNew(Cliente newClie,Cliente cliente) {
+	newClie.setNome(cliente.getNome());
+	newClie.setCpf(cliente.getCpf());
+	newClie.setDataNascimento(cliente.getDataNascimento());
+}
+public Cliente fromDto(ClienteDto clienteDto) {
+	return new Cliente(clienteDto.getId(),clienteDto.getNome(),clienteDto.getCpf(),clienteDto.getDataNascimento());
+	
+}
 }
