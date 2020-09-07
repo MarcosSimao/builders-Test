@@ -42,15 +42,37 @@ public Cliente findByNome(String nome) {
 		return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 
+
 public Cliente insert(Cliente cliente) {
+	
+if(verificarCpf(cliente)) {
+		throw	new ObjectNotFoundException("cpf não encontrado");
+	}
+		
 	return repo.insert(cliente);
 	
 }
+public boolean verificarCpf(Cliente cliente) {
+
+	List<Cliente> newClie = findAll();
+	for(Cliente c : newClie) {
+		if(c.getCpf().equals(cliente.getCpf())) {
+			return true;
+			}
+			}
+	return false;	
+		}
+
+
 public void delete(String id) {
+
 	findById(id);
-	repo.deleteById(id);
+	repo.deleteById(id);	
 	
 }
+
+
+
 public Cliente update(Cliente cliente) {
 	Cliente newClie = findById(cliente.getId());
 	
@@ -59,6 +81,7 @@ public Cliente update(Cliente cliente) {
 	
 	
 }
+
 public void updateNew(Cliente newClie,Cliente cliente) {
 	newClie.setNome(cliente.getNome());
 	newClie.setCpf(cliente.getCpf());
