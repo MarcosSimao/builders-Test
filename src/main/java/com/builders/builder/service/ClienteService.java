@@ -1,9 +1,13 @@
 package com.builders.builder.service;
 
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.builders.builder.Repository.ClienteReposity;
@@ -19,6 +23,10 @@ public class ClienteService {
 	@Autowired
 	private ClienteReposity repo;
 
+	public Page<Cliente> findAllP(Pageable pagina){
+		Page<Cliente> pagi = repo.findAll(pagina);
+		return pagi;
+		}
 	public List<Cliente> findAll(){
 		return repo.findAll();
 		}

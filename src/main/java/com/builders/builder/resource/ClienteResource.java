@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,9 +29,9 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService servi;
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<ClienteDto>>findAll(){
+	public ResponseEntity<List<ClienteDto>>findAll(@PageableDefault(page = 0, size = 8, sort = "id", direction = Direction.DESC) org.springframework.data.domain.Pageable pagina){
 		
-		List<Cliente> list = servi.findAll();
+		Page<Cliente> list = servi.findAllP(pagina);
 		List<ClienteDto> listDto = list.stream().map(x -> new ClienteDto(x)).collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(listDto);
