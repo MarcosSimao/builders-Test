@@ -10,7 +10,7 @@ import com.builders.builder.Repository.ClienteReposity;
 import com.builders.builder.domain.Cliente;
 import com.builders.builder.dto.ClienteDto;
 import com.builders.builder.service.exception.ObjectNotFoundException;
-
+import com.builders.builder.service.exception.ObjectUnauthorizedException;
 import com.sun.jdi.ObjectCollectedException;
 
 @Service
@@ -44,18 +44,17 @@ public Cliente findByNome(String nome) {
 
 
 public Cliente insert(Cliente cliente) {
-	
-if(verificarCpf(cliente)) {
-		throw	new ObjectNotFoundException("cpf não encontrado");
+	if(checkCpf(cliente)) {
+		throw	new ObjectUnauthorizedException("cpf ja existente !!!");
 	}
 		
 	return repo.insert(cliente);
 	
 }
-public boolean verificarCpf(Cliente cliente) {
+public boolean checkCpf(Cliente cliente) {
 
-	List<Cliente> newClie = findAll();
-	for(Cliente c : newClie) {
+	List<Cliente> existingCustomer = findAll();
+	for(Cliente c : existingCustomer) {
 		if(c.getCpf().equals(cliente.getCpf())) {
 			return true;
 			}
@@ -71,15 +70,31 @@ public void delete(String id) {
 	
 }
 
-
-
 public Cliente update(Cliente cliente) {
 	Cliente newClie = findById(cliente.getId());
 	
 	updateNew(newClie,cliente);
+	if(updatecheckCpf(cliente)) {
+		throw	new ObjectUnauthorizedException("cpf ja existente !!!");
+	}
 	return repo.save(newClie);
 	
-	
+}
+public boolean updatecheckCpf(Cliente cliente) {
+	List<Cliente> existingCustomer = findAll();
+	for(Cliente c : existingCustomer) {
+		if(c.getCpf().equals(cliente.getCpf())) {
+			if(!c.getId().equals(cliente.getId()))
+			return true;
+			}else if(c.getCpf().equals(cliente.getCpf())) {
+				if(c.getId().equals(cliente.getId())) {
+					
+					return false;
+					}
+				}
+		
+		}
+	return false;
 }
 
 public void updateNew(Cliente newClie,Cliente cliente) {
