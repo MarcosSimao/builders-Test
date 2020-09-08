@@ -24,4 +24,45 @@ Desenvolva um projeto Java com Spring Boot (utilizando qualquer modulo que achar
 
 Aqui eu irei mostrar todo o processo de teste feito pelo postman:
 
-o primeiro e o GET , nele ha tres  4 maneiras  para acessalo  a primeira 
+o primeiro e o GET , nele ha  4 maneiras  para acessa-lo...  A primeira  e com o metodo findAll que esta incluindo dentro do mesmo a paginacao.
+Nele lista todos que estao cadastrado no banco... para acessa-lo colocamos esta url:
+
+```
+GET http://localhost:8080/clientes
+```
+esse o resultado:
+
+```
+[
+    {
+        "id": "5f580a6fa4742943b47c87d2",
+        "nome": "Januario ferreira",
+        "cpf": "345.784.093.23",
+        "dataNascimento": "22/10/1990",
+        "idade": 29
+    },
+    {
+        "id": "5f580a6fa4742943b47c87d1",
+        "nome": "Leticia afrodite",
+        "cpf": "983.345.456.11",
+        "dataNascimento": "23/11/2001",
+        "idade": 18
+    },
+    {
+        "id": "5f580a6fa4742943b47c87d0",
+        "nome": "Lucas almeida",
+        "cpf": "234.123.093.33",
+        "dataNascimento": "01/12/1999",
+        "idade": 20
+    },
+    {
+        "id": "5f580a6fa4742943b47c87cf",
+        "nome": "Marcos alecrim",
+        "cpf": "123.345.093.23",
+        "dataNascimento": "12/02/1993",
+        "idade": 27
+    }
+]
+```
+
+
