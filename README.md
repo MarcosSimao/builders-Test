@@ -24,7 +24,7 @@ Desenvolva um projeto Java com Spring Boot (utilizando qualquer modulo que achar
 
 Aqui eu irei mostrar todo o processo de teste feito pelo postman:
 
-o primeiro e o GET , nele ha  4 maneiras  para acessa-lo...  A primeira  e com o metodo findAll que esta incluindo dentro do mesmo a paginacao.
+o primeiro e o GET , nele ha  4 maneiras  para acessa-lo...  A primeira  e com o metodo findAll que esta incluido dentro do mesmo... tudo paginado.
 Nele lista todos que estao cadastrado no banco... para acessa-lo colocamos esta url:
 
 ```
@@ -133,7 +133,7 @@ pelo metodo na classe DTO cliente... se vc olhar esse modelo vai perceber que id
         "dataNascimento": "14/01/1991"
     }
 ```
-Caso  o cpf ja estiver cadastrado , e restornado o erro :
+Caso  o cpf ja esteja cadastrado , e retornado o erro :
 
  ```
 {
