@@ -205,19 +205,20 @@ PUT http://localhost:8080/clientes/5f581b74a4742943b47c87d3
 `````
 Pegamos o id de Laiane e alteramos o nome dela para Lorena... Caso o cpf seja mudado segue o mesmo método do post, retorna o erro 401
 E o modelo para atualizar segue neste padrão:
+ 
+```` 
 
-```````
 {
         
         "nome": "Lorena Silva ",
         "cpf": "800.784.093.23",
         "dataNascimento": "14/01/1991"
     }
+````
 
-`
 E se listarmos novamente, podemos observar que Laiane, agora, se chama Lorena...
 
-`
+``````
 [
     {
         "id": "5f581b74a4742943b47c87d3",
@@ -256,17 +257,15 @@ E se listarmos novamente, podemos observar que Laiane, agora, se chama Lorena...
     }
 ]
 
-`````
+``````
 E o Próximo verbo é o DELETE ... ele recebe o id do cliente e assim o mesmo é excluído do sistema ...
 Segue esta url:
-
-`````
+````
 DELETE http://localhost:8080/clientes/5f581b74a4742943b47c87d3
+````
 
-`````
 Agora se listarmos novamente, é perceptível que Lorena não se encontra mais entre os cadastrados.
-
-```````
+````
 [
     {
         "id": "5f580a6fa4742943b47c87d2",
@@ -297,11 +296,11 @@ Agora se listarmos novamente, é perceptível que Lorena não se encontra mais e
         "idade": 27
     }
 ]
+````
 
-`
 Caso não encontre o cpf, nome e id, será retornado esse erro:
 
-`
+````
 {
     "timeStamp": 1599611064332,
     "status": 404,
@@ -309,8 +308,8 @@ Caso não encontre o cpf, nome e id, será retornado esse erro:
     "message": "Objeto não encontrado",
     "path": "/clientes/hyyyy"
 }
-
-`````
+````
 
 Esses testes foram realizados no servidor Local ...
+
 caso queira testar é só baixá-lo...!!!!
